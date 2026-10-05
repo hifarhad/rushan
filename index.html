@@ -1,0 +1,2373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Rushan — My Little Adventures</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Nunito:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --paper:#fffdf8;
+  --ink:#302b25;
+  --soft:#756d63;
+
+  --blue:#70b8d2;
+  --blue-soft:#e8f7fc;
+
+  --green:#82b883;
+  --green-soft:#edf8ed;
+
+  --yellow:#f4c95d;
+  --yellow-soft:#fff5d2;
+
+  --red:#df7777;
+  --red-soft:#fff0f0;
+
+  --purple:#a58bc9;
+  --purple-soft:#f3effb;
+
+  --orange:#e9a15b;
+  --orange-soft:#fff0df;
+
+  --border:#eadfce;
+}
+
+* {
+  box-sizing:border-box;
+}
+
+html {
+  scroll-behavior:smooth;
+}
+
+body {
+  margin:0;
+  color:var(--ink);
+  font-family:"Nunito",Arial,sans-serif;
+  font-size:18px;
+  line-height:1.7;
+
+  background:
+    radial-gradient(circle at 10% 5%,#fff0ae 0,transparent 24%),
+    radial-gradient(circle at 90% 10%,#dff5fc 0,transparent 25%),
+    linear-gradient(135deg,#f4efe5,#e8e1d5);
+}
+
+
+/* =====================================================
+   TOP TOOLBAR
+   ===================================================== */
+
+.toolbar {
+  position:sticky;
+  top:0;
+  z-index:1000;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:9px;
+
+  padding:11px;
+
+  background:rgba(255,253,248,.96);
+  backdrop-filter:blur(12px);
+
+  border-bottom:1px solid var(--border);
+}
+
+.toolbar button {
+  border:0;
+  border-radius:50px;
+  padding:9px 17px;
+
+  font-family:"Nunito",Arial,sans-serif;
+  font-weight:800;
+  font-size:14px;
+
+  cursor:pointer;
+
+  transition:.18s;
+}
+
+.toolbar button:hover {
+  transform:translateY(-2px);
+}
+
+.save {
+  background:#548e60;
+  color:white;
+}
+
+.print {
+  background:#4c87a2;
+  color:white;
+}
+
+.reset {
+  background:#e9e2d8;
+  color:#655e55;
+}
+
+
+/* =====================================================
+   BOOK
+   ===================================================== */
+
+.book {
+  width:min(900px,calc(100% - 18px));
+  margin:22px auto 60px;
+
+  background:var(--paper);
+
+  border-radius:22px;
+  overflow:hidden;
+
+  box-shadow:
+    0 25px 70px rgba(60,50,35,.14);
+}
+
+
+/* =====================================================
+   COVER
+   ===================================================== */
+
+.cover {
+  min-height:570px;
+
+  padding:60px 30px;
+
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+
+  text-align:center;
+
+  background:
+    radial-gradient(circle at 10% 20%,#fff0a9 0,transparent 25%),
+    radial-gradient(circle at 90% 15%,#d7f2fb 0,transparent 27%),
+    radial-gradient(circle at 80% 90%,#dcf4dc 0,transparent 25%),
+    linear-gradient(145deg,#fffaf0,#f5ecd9);
+}
+
+.cover-icon {
+  font-size:68px;
+}
+
+.cover-small {
+  margin-top:8px;
+
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:3px;
+  text-transform:uppercase;
+
+  color:#98742d;
+}
+
+.cover h1 {
+  margin:15px 0 0;
+
+  font-family:"Baloo 2",sans-serif;
+  font-size:clamp(54px,11vw,88px);
+  line-height:.88;
+  font-weight:800;
+
+  color:#3d352c;
+}
+
+.cover-subtitle {
+  max-width:580px;
+  margin-top:25px;
+
+  font-size:20px;
+  color:var(--soft);
+}
+
+.cover-name {
+  margin-top:35px;
+
+  font-size:17px;
+  font-weight:700;
+
+  color:#74695d;
+}
+
+
+/* =====================================================
+   TAB NAVIGATION
+   ===================================================== */
+
+.tabs-wrap {
+  position:sticky;
+  top:61px;
+  z-index:900;
+
+  padding:12px 10px;
+
+  background:
+    rgba(255,253,248,.97);
+
+  border-top:1px solid #f0e8db;
+  border-bottom:1px solid var(--border);
+}
+
+.tabs {
+  display:flex;
+  gap:8px;
+
+  max-width:850px;
+  margin:auto;
+
+  overflow-x:auto;
+  scrollbar-width:none;
+
+  padding:2px;
+}
+
+.tabs::-webkit-scrollbar {
+  display:none;
+}
+
+.tab {
+  flex:0 0 auto;
+
+  border:0;
+
+  border-radius:18px;
+
+  padding:10px 15px;
+
+  background:#f3eee6;
+
+  color:#70675d;
+
+  font-family:"Nunito",sans-serif;
+  font-weight:800;
+  font-size:14px;
+
+  cursor:pointer;
+
+  white-space:nowrap;
+
+  transition:.2s;
+}
+
+.tab:hover {
+  transform:translateY(-1px);
+}
+
+.tab.active {
+  background:#4f7e63;
+  color:white;
+
+  box-shadow:
+    0 5px 14px rgba(60,100,70,.2);
+}
+
+
+/* =====================================================
+   CONTENT
+   ===================================================== */
+
+.content {
+  padding:48px 65px 70px;
+}
+
+.panel {
+  display:none;
+
+  animation:
+    fadeIn .25s ease;
+}
+
+.panel.active {
+  display:block;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity:0;
+    transform:translateY(7px);
+  }
+
+  to {
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+.chapter {
+  max-width:760px;
+  margin:0 auto;
+}
+
+.label {
+  display:inline-block;
+
+  padding:6px 14px;
+
+  border-radius:20px;
+
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:1.2px;
+
+  text-transform:uppercase;
+}
+
+.blue-label {
+  background:var(--blue-soft);
+  color:#4b8198;
+}
+
+.green-label {
+  background:var(--green-soft);
+  color:#537d57;
+}
+
+.yellow-label {
+  background:var(--yellow-soft);
+  color:#98751e;
+}
+
+.red-label {
+  background:var(--red-soft);
+  color:#a25656;
+}
+
+.purple-label {
+  background:var(--purple-soft);
+  color:#76639a;
+}
+
+.orange-label {
+  background:var(--orange-soft);
+  color:#a76d35;
+}
+
+h2 {
+  margin:15px 0 18px;
+
+  font-family:"Baloo 2",sans-serif;
+
+  font-size:clamp(37px,6vw,54px);
+  line-height:1;
+
+  font-weight:800;
+
+  color:#3d362d;
+}
+
+p {
+  margin:0 0 18px;
+  font-size:18px;
+}
+
+
+/* =====================================================
+   SWIMMING
+   ===================================================== */
+
+.swim-card {
+  margin:30px 0;
+  padding:35px 25px;
+
+  text-align:center;
+
+  border-radius:25px;
+
+  background:
+    linear-gradient(145deg,#e6f8fd,#d5eff8);
+
+  border:1px solid #c9e5ee;
+}
+
+.swim-icon {
+  font-size:70px;
+}
+
+.swim-title {
+  margin-top:10px;
+
+  font-family:"Baloo 2",sans-serif;
+  font-size:40px;
+  line-height:1;
+  font-weight:800;
+
+  color:#427c94;
+}
+
+.swim-subtitle {
+  margin-top:9px;
+
+  font-size:15px;
+  font-weight:700;
+
+  color:#648898;
+}
+
+
+/* =====================================================
+   WATER WORDS
+   ===================================================== */
+
+.water-words {
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+
+  margin-top:25px;
+}
+
+.word {
+  padding:17px;
+
+  background:white;
+
+  border-radius:16px;
+
+  border:1px solid #d9ebf0;
+}
+
+.word-big {
+  font-family:"Baloo 2",sans-serif;
+  font-size:24px;
+  font-weight:800;
+
+  color:#4b7e91;
+}
+
+.word-small {
+  font-size:13px;
+  color:#81786e;
+}
+
+
+/* =====================================================
+   PLANTS
+   ===================================================== */
+
+.plant-card {
+  margin:30px 0;
+  padding:30px;
+
+  border-radius:23px;
+
+  background:var(--green-soft);
+
+  border:1px solid #d6e8d6;
+}
+
+.plant-icon {
+  font-size:52px;
+}
+
+.plant-card h3 {
+  margin:5px 0 10px;
+
+  font-family:"Baloo 2",sans-serif;
+  font-size:34px;
+
+  color:#507756;
+}
+
+
+/* =====================================================
+   KITA
+   ===================================================== */
+
+.kita-card {
+  margin:30px 0;
+  padding:30px;
+
+  text-align:center;
+
+  border-radius:23px;
+
+  background:var(--red-soft);
+
+  border:1px solid #f0d5d5;
+}
+
+.kita-icon {
+  font-size:58px;
+}
+
+.kita-name {
+  font-family:"Baloo 2",sans-serif;
+
+  font-size:43px;
+  line-height:1;
+  font-weight:800;
+
+  color:#a65b5b;
+}
+
+.kita-sub {
+  margin-top:8px;
+
+  font-size:15px;
+  font-weight:700;
+
+  color:#936b6b;
+}
+
+
+/* =====================================================
+   ALPHABET
+   ===================================================== */
+
+.alphabet-card {
+  margin:30px 0;
+  padding:30px;
+
+  border-radius:23px;
+
+  background:var(--yellow-soft);
+
+  border:1px solid #efdfb3;
+}
+
+.alphabet-title {
+  font-family:"Baloo 2",sans-serif;
+
+  font-size:34px;
+  font-weight:800;
+
+  color:#9a751f;
+
+  text-align:center;
+
+  margin-bottom:20px;
+}
+
+.alphabet {
+  display:grid;
+  grid-template-columns:repeat(6,1fr);
+  gap:8px;
+}
+
+.letter {
+  aspect-ratio:1;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  border-radius:12px;
+
+  background:white;
+
+  font-family:"Baloo 2",sans-serif;
+  font-size:25px;
+  font-weight:800;
+
+  color:#765f2c;
+
+  box-shadow:
+    0 2px 5px rgba(80,60,20,.05);
+}
+
+
+/* =====================================================
+   LESSON
+   ===================================================== */
+
+.lesson {
+  margin:30px 0;
+  padding:28px;
+
+  background:var(--purple-soft);
+
+  border-radius:23px;
+
+  border:1px solid #e1d9ef;
+
+  text-align:center;
+}
+
+.lesson h3 {
+  margin:0 0 12px;
+
+  font-family:"Baloo 2",sans-serif;
+  font-size:33px;
+
+  color:#76649b;
+}
+
+.lesson-big {
+  font-family:"Baloo 2",sans-serif;
+
+  font-size:42px;
+  font-weight:800;
+
+  color:#665486;
+}
+
+
+/* =====================================================
+   STORY
+   ===================================================== */
+
+.story-intro {
+  text-align:center;
+
+  margin-bottom:28px;
+}
+
+.story-card {
+  padding:35px 25px;
+
+  text-align:center;
+
+  border-radius:28px;
+
+  background:
+    radial-gradient(
+      circle at 10% 10%,
+      #fff0a9 0,
+      transparent 25%
+    ),
+
+    linear-gradient(
+      145deg,
+      #fff1ef,
+      #fff9eb
+    );
+
+  border:1px solid #efd2c9;
+
+  box-shadow:
+    0 8px 25px rgba(130,80,50,.06);
+}
+
+.story-icon {
+  font-size:70px;
+  margin-bottom:10px;
+}
+
+.story-text {
+  max-width:620px;
+
+  margin:0 auto 20px;
+
+  font-size:19px;
+  font-weight:600;
+
+  line-height:1.85;
+}
+
+.story-scene {
+  font-size:52px;
+  margin:15px 0;
+}
+
+.story-dialogue {
+  max-width:510px;
+
+  margin:22px auto;
+
+  padding:18px 20px;
+
+  background:white;
+
+  border-radius:18px;
+
+  font-family:"Baloo 2",sans-serif;
+
+  font-size:27px;
+  font-weight:700;
+
+  color:#985b55;
+
+  box-shadow:
+    0 4px 14px rgba(90,50,30,.06);
+}
+
+.story-lesson {
+  margin-top:25px;
+
+  padding:22px;
+
+  border-radius:18px;
+
+  background:rgba(255,255,255,.75);
+
+  font-family:"Baloo 2",sans-serif;
+
+  font-size:28px;
+  line-height:1.25;
+  font-weight:800;
+
+  color:#985b55;
+}
+
+
+/* =====================================================
+   HOME / ADVENTURE CARD
+   ===================================================== */
+
+.welcome {
+  text-align:center;
+}
+
+.welcome-hero {
+  padding:30px 15px;
+}
+
+.welcome-emoji {
+  font-size:75px;
+}
+
+.welcome h2 {
+  margin-top:12px;
+}
+
+.adventure-grid {
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:14px;
+
+  margin-top:30px;
+}
+
+.adventure {
+  padding:22px 15px;
+
+  border-radius:20px;
+
+  text-align:center;
+
+  background:#fff;
+
+  border:1px solid var(--border);
+
+  cursor:pointer;
+
+  transition:.2s;
+}
+
+.adventure:hover {
+  transform:translateY(-3px);
+  box-shadow:0 8px 20px rgba(70,50,30,.08);
+}
+
+.adventure-icon {
+  font-size:42px;
+}
+
+.adventure-title {
+  margin-top:6px;
+
+  font-family:"Baloo 2",sans-serif;
+
+  font-size:23px;
+  font-weight:800;
+}
+
+
+/* =====================================================
+   FINAL
+   ===================================================== */
+
+.final {
+  margin-top:50px;
+
+  padding:35px 10px 15px;
+
+  text-align:center;
+
+  border-top:1px dashed var(--border);
+}
+
+.final-heart {
+  font-size:58px;
+}
+
+.final h2 {
+  margin-top:12px;
+
+  font-size:clamp(40px,8vw,60px);
+}
+
+.signature {
+  margin-top:40px;
+
+  font-size:18px;
+
+  color:#62594e;
+}
+
+.footer {
+  margin-top:40px;
+
+  font-size:11px;
+
+  letter-spacing:1px;
+
+  color:#a1988c;
+}
+
+
+/* =====================================================
+   EDITABLE TEXT
+   ===================================================== */
+
+[contenteditable="true"] {
+  outline:none;
+  border-radius:6px;
+}
+
+[contenteditable="true"]:focus {
+  background:rgba(245,220,150,.22);
+}
+
+
+/* =====================================================
+   SAVED MESSAGE
+   ===================================================== */
+
+.saved {
+  position:fixed;
+
+  right:18px;
+  bottom:18px;
+
+  z-index:3000;
+
+  padding:12px 17px;
+
+  border-radius:12px;
+
+  background:#416b49;
+
+  color:white;
+
+  font-size:14px;
+  font-weight:800;
+
+  opacity:0;
+
+  transform:translateY(10px);
+
+  transition:.25s;
+
+  pointer-events:none;
+}
+
+.saved.show {
+  opacity:1;
+  transform:translateY(0);
+}
+
+
+/* =====================================================
+   MOBILE
+   ===================================================== */
+
+@media (max-width:700px) {
+
+  body {
+    font-size:17px;
+  }
+
+  .book {
+    width:calc(100% - 10px);
+    margin-top:8px;
+    border-radius:15px;
+  }
+
+  .cover {
+    min-height:540px;
+    padding:45px 20px;
+  }
+
+  .cover h1 {
+    font-size:clamp(53px,16vw,76px);
+  }
+
+  .cover-subtitle {
+    font-size:18px;
+  }
+
+  .tabs-wrap {
+    top:58px;
+    padding:9px 6px;
+  }
+
+  .tab {
+    padding:9px 13px;
+    font-size:13px;
+  }
+
+  .content {
+    padding:38px 21px 55px;
+  }
+
+  p {
+    font-size:17px;
+  }
+
+  .water-words {
+    grid-template-columns:1fr;
+  }
+
+  .alphabet {
+    grid-template-columns:repeat(5,1fr);
+  }
+
+  .letter {
+    font-size:22px;
+  }
+
+  .adventure-grid {
+    grid-template-columns:1fr;
+  }
+
+  .story-text {
+    font-size:18px;
+  }
+
+  .story-dialogue {
+    font-size:23px;
+  }
+
+  .story-lesson {
+    font-size:25px;
+  }
+
+  .toolbar {
+    gap:6px;
+  }
+
+  .toolbar button {
+    padding:8px 12px;
+    font-size:13px;
+  }
+}
+
+
+/* =====================================================
+   PRINT
+   ===================================================== */
+
+@media print {
+
+  body {
+    background:white;
+  }
+
+  .toolbar,
+  .tabs-wrap,
+  .saved {
+    display:none !important;
+  }
+
+  .book {
+    width:100%;
+    margin:0;
+    border-radius:0;
+    box-shadow:none;
+  }
+
+  /*
+     Print all tabs rather than only
+     the currently visible tab.
+  */
+
+  .panel {
+    display:block !important;
+
+    break-inside:auto;
+  }
+
+  .panel:not(:first-child) {
+    break-before:page;
+  }
+
+  .cover {
+    min-height:90vh;
+    break-after:page;
+  }
+
+  .chapter {
+    break-inside:avoid;
+  }
+
+  @page {
+    size:A4;
+    margin:10mm;
+  }
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     TOOLBAR
+     ===================================================== -->
+
+<div class="toolbar">
+
+  <button
+    class="save"
+    onclick="saveBook()">
+    💾 Save
+  </button>
+
+  <button
+    class="print"
+    onclick="window.print()">
+    🖨️ Print
+  </button>
+
+  <button
+    class="reset"
+    onclick="resetBook()">
+    ↺ Reset
+  </button>
+
+</div>
+
+
+
+<!-- =====================================================
+     BOOK
+     ===================================================== -->
+
+<main class="book">
+
+
+<!-- =====================================================
+     COVER
+     ===================================================== -->
+
+<section class="cover">
+
+  <div class="cover-icon">
+    🌊
+  </div>
+
+  <div class="cover-small">
+    A little book for Rushan
+  </div>
+
+  <h1 contenteditable="true">
+    My Little<br>
+    Adventures
+  </h1>
+
+  <div
+    class="cover-subtitle"
+    contenteditable="true">
+
+    Swimming, helping,
+    learning, playing
+    and imagining!
+
+  </div>
+
+  <div class="cover-name">
+
+    For our little
+
+    <strong>
+      Rushan
+    </strong>
+
+    ❤️
+
+  </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     TABS
+     ===================================================== -->
+
+<nav class="tabs-wrap">
+
+  <div class="tabs">
+
+    <button
+      class="tab active"
+      data-tab="home">
+      🏠 Home
+    </button>
+
+    <button
+      class="tab"
+      data-tab="swimming">
+      🌊 Swimming
+    </button>
+
+    <button
+      class="tab"
+      data-tab="helping">
+      🌱 Helping
+    </button>
+
+    <button
+      class="tab"
+      data-tab="kita">
+      🧸 Kita
+    </button>
+
+    <button
+      class="tab"
+      data-tab="abc">
+      🔤 ABC
+    </button>
+
+    <button
+      class="tab"
+      data-tab="learning">
+      ⭐ Learning
+    </button>
+
+    <button
+      class="tab"
+      data-tab="story">
+      🐎 Story
+    </button>
+
+  </div>
+
+</nav>
+
+
+
+<!-- =====================================================
+     CONTENT
+     ===================================================== -->
+
+<section class="content">
+
+
+<!-- =====================================================
+     HOME TAB
+     ===================================================== -->
+
+<section
+  class="panel active"
+  id="home">
+
+  <div class="chapter welcome">
+
+    <div class="welcome-hero">
+
+      <div class="welcome-emoji">
+        🏊‍♂️🌱🐎
+      </div>
+
+      <div class="label orange-label">
+        Welcome, Rushan!
+      </div>
+
+      <h2 contenteditable="true">
+        Ready for an adventure?
+      </h2>
+
+      <p contenteditable="true">
+
+        This little book is about
+        things you do, things you learn,
+        and things you discover.
+
+      </p>
+
+      <p contenteditable="true">
+
+        Pick an adventure above
+        and let's go!
+
+      </p>
+
+    </div>
+
+
+    <div class="adventure-grid">
+
+      <div
+        class="adventure"
+        onclick="openTab('swimming')">
+
+        <div class="adventure-icon">
+          🏊‍♂️
+        </div>
+
+        <div class="adventure-title">
+          Swimming
+        </div>
+
+      </div>
+
+
+      <div
+        class="adventure"
+        onclick="openTab('helping')">
+
+        <div class="adventure-icon">
+          🪴
+        </div>
+
+        <div class="adventure-title">
+          Helping Mum
+        </div>
+
+      </div>
+
+
+      <div
+        class="adventure"
+        onclick="openTab('kita')">
+
+        <div class="adventure-icon">
+          🧸
+        </div>
+
+        <div class="adventure-title">
+          Kita
+        </div>
+
+      </div>
+
+
+      <div
+        class="adventure"
+        onclick="openTab('abc')">
+
+        <div class="adventure-icon">
+          🔤
+        </div>
+
+        <div class="adventure-title">
+          ABC
+        </div>
+
+      </div>
+
+
+      <div
+        class="adventure"
+        onclick="openTab('learning')">
+
+        <div class="adventure-icon">
+          ⭐
+        </div>
+
+        <div class="adventure-title">
+          Learning
+        </div>
+
+      </div>
+
+
+      <div
+        class="adventure"
+        onclick="openTab('story')">
+
+        <div class="adventure-icon">
+          🐎
+        </div>
+
+        <div class="adventure-title">
+          Story
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="final">
+
+      <div class="final-heart">
+        ❤️
+      </div>
+
+      <p contenteditable="true">
+
+        Keep exploring, little Rushan.
+
+      </p>
+
+      <div class="signature">
+
+        With lots of love,
+
+        <br><br>
+
+        <strong>
+          Dad — Farhad
+        </strong>
+
+        <br>
+
+        <strong>
+          Mum — Tabassum
+        </strong>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     SWIMMING TAB
+     ===================================================== -->
+
+<section
+  class="panel"
+  id="swimming">
+
+  <div class="chapter">
+
+    <div class="label blue-label">
+      My New Adventure
+    </div>
+
+    <h2 contenteditable="true">
+      Rushan meets the water! 🌊
+    </h2>
+
+    <p contenteditable="true">
+
+      Rushan started swimming yesterday!
+
+    </p>
+
+    <p contenteditable="true">
+
+      And guess what?
+
+      You were really good!
+
+    </p>
+
+    <p contenteditable="true">
+
+      You joined in actively.
+
+      You were a real
+      <strong>Mitmacher</strong>.
+
+    </p>
+
+    <p contenteditable="true">
+
+      You didn't seem scared of the water.
+
+      You were ready to try.
+
+    </p>
+
+
+    <div class="swim-card">
+
+      <div class="swim-icon">
+        🏊‍♂️
+      </div>
+
+      <div class="swim-title">
+        A True Water Boy!
+      </div>
+
+      <div class="swim-subtitle">
+        Ein echter Wasserjunge!
+      </div>
+
+    </div>
+
+
+    <p contenteditable="true">
+
+      Maybe one day you will become
+      a great swimmer.
+
+    </p>
+
+    <p contenteditable="true">
+
+      And who knows...
+
+    </p>
+
+
+    <div class="swim-card">
+
+      <div class="swim-icon">
+        🛟
+      </div>
+
+      <div class="swim-title">
+        Wasserretter
+      </div>
+
+      <div class="swim-subtitle">
+        Water rescuer · Rettungsschwimmer
+      </div>
+
+    </div>
+
+
+    <p contenteditable="true">
+
+      Or maybe even a
+
+      <strong>Schwimmlehrer</strong> —
+
+      a swimming teacher!
+
+    </p>
+
+    <p contenteditable="true">
+
+      But for now...
+
+      enjoy the water,
+      learn safely,
+      and have fun. 😊
+
+    </p>
+
+
+    <div class="water-words">
+
+      <div class="word">
+        <div class="word-big">
+          Wasser
+        </div>
+        <div class="word-small">
+          Water 💧
+        </div>
+      </div>
+
+      <div class="word">
+        <div class="word-big">
+          Schwimmen
+        </div>
+        <div class="word-small">
+          Swimming 🏊
+        </div>
+      </div>
+
+      <div class="word">
+        <div class="word-big">
+          Schwimmer
+        </div>
+        <div class="word-small">
+          Swimmer
+        </div>
+      </div>
+
+      <div class="word">
+        <div class="word-big">
+          Wasserretter
+        </div>
+        <div class="word-small">
+          Water rescuer 🛟
+        </div>
+      </div>
+
+      <div class="word">
+        <div class="word-big">
+          Schwimmlehrer
+        </div>
+        <div class="word-small">
+          Swimming teacher
+        </div>
+      </div>
+
+      <div class="word">
+        <div class="word-big">
+          Mut
+        </div>
+        <div class="word-small">
+          Courage 💪
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     HELPING TAB
+     ===================================================== -->
+
+<section
+  class="panel"
+  id="helping">
+
+  <div class="chapter">
+
+    <div class="label green-label">
+      Helping Mum
+    </div>
+
+    <h2 contenteditable="true">
+      Little gardener 🌱
+    </h2>
+
+    <p contenteditable="true">
+
+      Swimming isn't your only adventure.
+
+    </p>
+
+    <p contenteditable="true">
+
+      You also helped Mum
+      change the tops of the plants.
+
+    </p>
+
+
+    <div class="plant-card">
+
+      <div class="plant-icon">
+        🪴
+      </div>
+
+      <h3>
+        Pflanzen helfen!
+      </h3>
+
+      <p contenteditable="true">
+
+        Plants need care.
+
+        And sometimes Mum needs
+        a little helper too.
+
+      </p>
+
+      <p contenteditable="true">
+
+        Thank you for helping, Rushan.
+
+        🌱❤️
+
+      </p>
+
+    </div>
+
+
+    <p contenteditable="true">
+
+      Helping is a little way
+      of saying:
+
+      <strong>
+        “I care.”
+      </strong>
+
+    </p>
+
+    <p contenteditable="true">
+
+      Maybe one day you will have
+      your own little garden.
+
+    </p>
+
+  </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     KITA TAB
+     ===================================================== -->
+
+<section
+  class="panel"
+  id="kita">
+
+  <div class="chapter">
+
+    <div class="label red-label">
+      Kita
+    </div>
+
+    <h2 contenteditable="true">
+      My Kita adventure
+    </h2>
+
+    <p contenteditable="true">
+
+      You are still in Kita.
+
+    </p>
+
+    <p contenteditable="true">
+
+      Your Kita is a place where
+      you can play, learn,
+      make friends and discover things.
+
+    </p>
+
+
+    <div class="kita-card">
+
+      <div class="kita-icon">
+        🧸
+      </div>
+
+      <div class="kita-name">
+        Rot Bereich
+      </div>
+
+      <div class="kita-sub">
+        Your little Kita world ❤️
+      </div>
+
+    </div>
+
+
+    <p contenteditable="true">
+
+      Be kind to your friends.
+
+    </p>
+
+    <p contenteditable="true">
+
+      Listen to your teachers.
+
+    </p>
+
+    <p contenteditable="true">
+
+      Join in.
+
+      <strong>
+        Mitmachen!
+      </strong>
+
+    </p>
+
+    <p contenteditable="true">
+
+      And have lots of fun.
+
+    </p>
+
+  </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     ABC TAB
+     ===================================================== -->
+
+<section
+  class="panel"
+  id="abc">
+
+  <div class="chapter">
+
+    <div class="label yellow-label">
+      Learning Time
+    </div>
+
+    <h2 contenteditable="true">
+      Let's learn our ABC!
+    </h2>
+
+    <p contenteditable="true">
+
+      Letters are little building blocks
+      for words, stories and ideas.
+
+    </p>
+
+
+    <div class="alphabet-card">
+
+      <div class="alphabet-title">
+        🔤 A B C
+      </div>
+
+
+      <div class="alphabet">
+
+        <div class="letter">A</div>
+        <div class="letter">B</div>
+        <div class="letter">C</div>
+        <div class="letter">D</div>
+        <div class="letter">E</div>
+        <div class="letter">F</div>
+
+        <div class="letter">G</div>
+        <div class="letter">H</div>
+        <div class="letter">I</div>
+        <div class="letter">J</div>
+        <div class="letter">K</div>
+        <div class="letter">L</div>
+
+        <div class="letter">M</div>
+        <div class="letter">N</div>
+        <div class="letter">O</div>
+        <div class="letter">P</div>
+        <div class="letter">Q</div>
+        <div class="letter">R</div>
+
+        <div class="letter">S</div>
+        <div class="letter">T</div>
+        <div class="letter">U</div>
+        <div class="letter">V</div>
+        <div class="letter">W</div>
+        <div class="letter">X</div>
+
+        <div class="letter">Y</div>
+        <div class="letter">Z</div>
+
+      </div>
+
+    </div>
+
+
+    <div class="lesson">
+
+      <h3>
+        Can you find your letter?
+      </h3>
+
+      <div class="lesson-big">
+        R
+      </div>
+
+      <p contenteditable="true">
+
+        R is for
+        <strong>Rushan</strong>! ❤️
+
+      </p>
+
+    </div>
+
+
+    <p contenteditable="true">
+
+      A is for Apple 🍎
+
+    </p>
+
+    <p contenteditable="true">
+
+      B is for Ball ⚽
+
+    </p>
+
+    <p contenteditable="true">
+
+      C is for Cat 🐱
+
+    </p>
+
+  </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     LEARNING TAB
+     ===================================================== -->
+
+<section
+  class="panel"
+  id="learning">
+
+  <div class="chapter">
+
+    <div class="label purple-label">
+      One More Thing
+    </div>
+
+    <h2 contenteditable="true">
+      Keep trying.
+    </h2>
+
+    <p contenteditable="true">
+
+      You don't have to know everything.
+
+    </p>
+
+    <p contenteditable="true">
+
+      You just need to keep learning.
+
+    </p>
+
+    <p contenteditable="true">
+
+      Sometimes you will be great
+      at something immediately.
+
+    </p>
+
+    <p contenteditable="true">
+
+      Sometimes it will take
+      many tries.
+
+    </p>
+
+
+    <div class="lesson">
+
+      <h3>
+        The Rushan Rule
+      </h3>
+
+      <div class="lesson-big">
+        Try → Learn → Try Again
+      </div>
+
+    </div>
+
+
+    <p contenteditable="true">
+
+      If something feels difficult,
+      Mum and Dad are here.
+
+    </p>
+
+    <p contenteditable="true">
+
+      We can learn together.
+
+    </p>
+
+
+    <p contenteditable="true">
+
+      And remember:
+
+      <strong>
+        being curious is wonderful.
+      </strong>
+
+    </p>
+
+  </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     STORY TAB
+     ===================================================== -->
+
+<section
+  class="panel"
+  id="story">
+
+  <div class="chapter">
+
+    <div class="label red-label">
+      A Little Story
+    </div>
+
+    <h2 contenteditable="true">
+      The Prince and the Red Horse 🐎
+    </h2>
+
+    <div class="story-intro">
+
+      <p contenteditable="true">
+
+        A tiny adventure
+        for a little adventurer.
+
+      </p>
+
+    </div>
+
+
+    <div class="story-card">
+
+
+      <div class="story-icon">
+        👑🐎
+      </div>
+
+
+      <div
+        class="story-text"
+        contenteditable="true">
+
+        Once upon a time,
+        there was a little prince
+        who had a beautiful red horse.
+
+      </div>
+
+
+      <div
+        class="story-text"
+        contenteditable="true">
+
+        The horse was fast.
+
+        <br>
+
+        Very fast!
+
+      </div>
+
+
+      <div class="story-scene">
+        🐎💨
+      </div>
+
+
+      <div
+        class="story-text"
+        contenteditable="true">
+
+        One morning,
+        the prince climbed onto
+        his horse and rode
+        through the forest.
+
+      </div>
+
+
+      <div class="story-scene">
+        🌳🌳🌳
+      </div>
+
+
+      <div
+        class="story-text"
+        contenteditable="true">
+
+        Suddenly, they came
+        to a little river.
+
+      </div>
+
+
+      <div class="story-scene">
+        💦🐎💦
+      </div>
+
+
+      <div
+        class="story-text"
+        contenteditable="true">
+
+        The prince wanted
+        to go very fast.
+
+        <br><br>
+
+        But he stopped.
+
+      </div>
+
+
+      <div
+        class="story-dialogue"
+        contenteditable="true">
+
+        “Slowly,” he said.
+
+        <br>
+
+        “We need to be safe.”
+
+      </div>
+
+
+      <div
+        class="story-text"
+        contenteditable="true">
+
+        His red horse carefully
+        crossed the river.
+
+      </div>
+
+
+      <div class="story-scene">
+        👑 ❤️ 🐎
+      </div>
+
+
+      <div
+        class="story-lesson"
+        contenteditable="true">
+
+        Being brave doesn't mean
+        going fast.
+
+        <br><br>
+
+        Being brave means
+        knowing when to slow down.
+
+      </div>
+
+    </div>
+
+
+    <p
+      contenteditable="true"
+      style="
+        text-align:center;
+        margin-top:25px;
+      ">
+
+      And the prince and his red horse
+      continued their adventure. 🌟
+
+    </p>
+
+
+    <p
+      contenteditable="true"
+      style="
+        text-align:center;
+      ">
+
+      Maybe one day,
+      little Rushan will have
+      an adventure of his own.
+
+    </p>
+
+  </div>
+
+</section>
+
+
+
+</section>
+</main>
+
+
+
+<!-- =====================================================
+     SAVE MESSAGE
+     ===================================================== -->
+
+<div
+  class="saved"
+  id="saved">
+
+  ✓ Saved on this device
+
+</div>
+
+
+
+<script>
+
+/* =====================================================
+   STORAGE
+   ===================================================== */
+
+const STORAGE_KEY =
+  "rushan-tabbed-adventures";
+
+
+/* =====================================================
+   TAB SWITCHING
+   ===================================================== */
+
+const tabs =
+  document.querySelectorAll(".tab");
+
+const panels =
+  document.querySelectorAll(".panel");
+
+
+function openTab(tabName) {
+
+  tabs.forEach(tab => {
+
+    tab.classList.toggle(
+      "active",
+      tab.dataset.tab === tabName
+    );
+
+  });
+
+
+  panels.forEach(panel => {
+
+    panel.classList.toggle(
+      "active",
+      panel.id === tabName
+    );
+
+  });
+
+
+  /*
+    Scroll gently to the content
+    instead of leaving the user
+    halfway down the previous tab.
+  */
+
+  document.querySelector(
+    ".tabs-wrap"
+  ).scrollIntoView({
+    behavior:"smooth",
+    block:"start"
+  });
+
+}
+
+
+tabs.forEach(tab => {
+
+  tab.addEventListener(
+    "click",
+    () => {
+
+      openTab(
+        tab.dataset.tab
+      );
+
+    }
+  );
+
+});
+
+
+/* =====================================================
+   SAVE
+   ===================================================== */
+
+function saveBook() {
+
+  const book =
+    document.querySelector(
+      ".book"
+    ).innerHTML;
+
+  localStorage.setItem(
+    STORAGE_KEY,
+    book
+  );
+
+  showSaved();
+
+}
+
+
+/* =====================================================
+   SAVE MESSAGE
+   ===================================================== */
+
+function showSaved() {
+
+  const message =
+    document.getElementById(
+      "saved"
+    );
+
+  message.classList.add(
+    "show"
+  );
+
+  setTimeout(
+    () => {
+
+      message.classList.remove(
+        "show"
+      );
+
+    },
+    2200
+  );
+
+}
+
+
+/* =====================================================
+   LOAD
+   ===================================================== */
+
+function loadBook() {
+
+  const saved =
+    localStorage.getItem(
+      STORAGE_KEY
+    );
+
+  if (!saved) {
+    return;
+  }
+
+  document.querySelector(
+    ".book"
+  ).innerHTML =
+    saved;
+
+  /*
+    The saved HTML replaces the tabs,
+    so recreate the tab listeners.
+  */
+
+  setupTabs();
+
+}
+
+
+/* =====================================================
+   TAB SETUP
+   ===================================================== */
+
+function setupTabs() {
+
+  const currentTabs =
+    document.querySelectorAll(
+      ".tab"
+    );
+
+  const currentPanels =
+    document.querySelectorAll(
+      ".panel"
+    );
+
+
+  currentTabs.forEach(tab => {
+
+    tab.addEventListener(
+      "click",
+      () => {
+
+        currentTabs.forEach(t => {
+
+          t.classList.remove(
+            "active"
+          );
+
+        });
+
+        currentPanels.forEach(p => {
+
+          p.classList.remove(
+            "active"
+          );
+
+        });
+
+
+        tab.classList.add(
+          "active"
+        );
+
+
+        const panel =
+          document.getElementById(
+            tab.dataset.tab
+          );
+
+        if (panel) {
+
+          panel.classList.add(
+            "active"
+          );
+
+        }
+
+      }
+    );
+
+  });
+
+}
+
+
+/* =====================================================
+   RESET
+   ===================================================== */
+
+function resetBook() {
+
+  const answer =
+    confirm(
+      "Reset Rushan's book to the original version? Your edits will be removed."
+    );
+
+  if (!answer) {
+    return;
+  }
+
+  localStorage.removeItem(
+    STORAGE_KEY
+  );
+
+  location.reload();
+
+}
+
+
+/* =====================================================
+   AUTO SAVE
+   ===================================================== */
+
+window.addEventListener(
+  "beforeunload",
+  () => {
+
+    const book =
+      document.querySelector(
+        ".book"
+      ).innerHTML;
+
+    localStorage.setItem(
+      STORAGE_KEY,
+      book
+    );
+
+  }
+);
+
+
+/* =====================================================
+   INITIALIZE
+   ===================================================== */
+
+loadBook();
+
+</script>
+
+</body>
+</html>
